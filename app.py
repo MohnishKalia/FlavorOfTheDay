@@ -1,11 +1,11 @@
-from flask import Flask
+from flask import Flask, send_from_directory
 from datetime import timedelta
 import requests_cache
 from bs4 import BeautifulSoup as BS
 
 session = requests_cache.CachedSession('fotd', expire_after=timedelta(hours=3))
 
-app = Flask(__name__, static_folder='web/static')
+app = Flask(__name__, static_url_path='')
 
 @app.get('/fotd')
 def get_fotd():

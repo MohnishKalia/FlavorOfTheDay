@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+    <title>🍦 Flavors of the Day</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Flavors of the day</h2>
+        <hr>
+        <div id="today"></div>
+        <pre id="resPre" aria-busy="true">Obtaining flavors of the day from multiple locations...</pre>
+    </div>
+    <script>
+        const todayElt = document.querySelector('#today');
+        const resPreElt = document.querySelector('#resPre');
+
+        async function getFOTDs() {
+            const res = await fetch('./fotd');
+            const json = await res.json();
+            resPreElt.textContent = JSON.stringify(json, null, 4);
+            resPreElt.toggleAttribute('aria-busy');
+        }
+
+        getFOTDs();
+    </script>
+</body>
+
+</html>
